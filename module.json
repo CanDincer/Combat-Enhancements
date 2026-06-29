@@ -43,6 +43,6 @@
     }
   ],
   "url": "https://github.com/CanDincer/Combat-Enhancements",
-  "manifest": "https://github.com/CanDincer/Combat-Enhancements/blob/main/module.json",
-  "download": "https://gitlab.com/asacolips-projects/foundry-mods/combat-enhancements/-/archive/1.3.2/combat-enhancements-master.zip"
+  "manifest": "https://raw.githubusercontent.com/CanDincer/Combat-Enhancements/main/module.json",
+  "download": "https://github.com/CanDincer/Combat-Enhancements/archive/refs/heads/main.zip"
 }
