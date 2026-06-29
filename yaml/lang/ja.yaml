@@ -1,0 +1,10 @@
+COMBAT_ENHANCEMENTS.setting.reflow.label: イニシアチブの再調整を有効にする
+COMBAT_ENHANCEMENTS.setting.reflow.description: ドラッグ＆ドロップによってイニシアチブ順を並び替えたとき、ドラッグしたキャラクターのみならず、ほか戦闘参加者のイニシアチブ値も調整するようになります。無効にした場合、イニシアチブに敏捷力を表示せず、かつイニシアチブが同一の戦闘参加者が複数ある場合に並び替えが反映されないことがあります。
+COMBAT_ENHANCEMENTS.setting.showHpForType.label: HPを常に表示するアクタータイプ
+COMBAT_ENHANCEMENTS.setting.showHPForType.description: 指定したアクタータイプでは、イニシアチブ表で常にHPバーが表示されるようになります。
+COMBAT_ENHANCEMENTS.setting.enableHpField.label: HP入力欄を有効にする
+COMBAT_ENHANCEMENTS.setting.enableHpField.description: GMやアクター所有者が編集できるHP入力欄をイニシアチブ表に表示します。
+COMBAT_ENHANCEMENTS.setting.enableHpRadial.label: 環状のHPバーを表示する
+COMBAT_ENHANCEMENTS.setting.enableHpRadial.description: イニシアチブ表に環状のHPバーを表示します。ここで表示されるのは，トークン設定のバー1に設定した属性値です（有効の場合、GMは常にバーを見ることができます）。
+COMBAT_ENHANCEMENTS.setting.removeTargets.label: ターゲットを毎ターン外す
+COMBAT_ENHANCEMENTS.setting.removeTargets.description: 各ターン終了時に、現在のターゲットを外します。これはイニシアチブ表の「次のターン」ボタンを押すことで行われます。

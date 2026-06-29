@@ -1,0 +1,112 @@
+$c-white: #fff;
+$c-black: #000;
+$c-green: #41c179;
+$c-yellow: #f7d601;
+$c-orange: #f78c01;
+$c-red: #ca0000;
+
+.combatant {
+  position: relative;
+  min-height: 60px;
+
+  .ce-drop-indicator {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 5px;
+    width: 0px;
+    background: rgba(#fff, 0.75);
+    transition: all ease-in-out 0.25s;
+    pointer-events: none;
+  }
+
+  .token-resource {
+    padding-right: 6px;
+    line-height: 75px;
+    height: 100%;
+    color: #bfbfbf;
+  }
+
+  .token-initiative {
+    padding-top: 14px;
+  }
+
+  .ce-image-wrapper {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    border-radius: 50%;
+    overflow: hidden;
+
+    .progress-ring {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-shadow: inset 0 0 3px 5px rgba(0, 0, 0, 0.65);
+      border-radius: 50%;
+    }
+
+    .progress-ring--100,
+    .progress-ring--90 {
+      circle {
+        stroke: $c-green;
+      }
+    }
+
+    .progress-ring--80,
+    .progress-ring--70 {
+      circle {
+        stroke: $c-yellow;
+      }
+    }
+
+    .progress-ring--60,
+    .progress-ring--50,
+    .progress-ring--40 {
+      circle {
+        stroke: $c-orange;
+      }
+    }
+
+    .progress-ring--30,
+    .progress-ring--20,
+    .progress-ring--10,
+    .progress-ring--0 {
+      circle {
+        stroke: $c-red;
+      }
+    }
+  }
+
+  .ce-modify-hp-wrapper {
+    font-size: 12px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+
+  .ce-modify-hp {
+    color: $c-white;
+    width: 45px;
+    text-align: center;
+
+    &:hover,
+    &:active,
+    &:focus {
+      box-shadow: none;
+      background: rgba($c-white, 0.25);
+    }
+  }
+}
+
+.drop-hover {
+  .ce-drop-indicator {
+    width: 100%;
+  }
+}

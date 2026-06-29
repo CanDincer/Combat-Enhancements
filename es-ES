@@ -1,0 +1,12 @@
+{
+  "COMBAT_ENHANCEMENTS.setting.reflow.label": "Activar el reajuste de la iniciativa.",
+  "COMBAT_ENHANCEMENTS.setting.reflow.description": "Si las iniciativas son identicas, ajustar el combatiente siendo arrastrado además del combatiente sobre el que se arrastra.",
+  "COMBAT_ENHANCEMENTS.setting.showHpForType.label": "Mostar los PG para actores del tipo.",
+  "COMBAT_ENHANCEMENTS.setting.showHPForType.description": "Usa esto para mostrar siempre el radial de salud en el registro de combate para un tipo de actor específico, como por ejemplo PJs.",
+  "COMBAT_ENHANCEMENTS.setting.enableHpField.label": "Activar el campo PG",
+  "COMBAT_ENHANCEMENTS.setting.enableHpField.description": "Activar un campo de salud editable en el registro de combate para los DM y los propietarios de los actores.",
+  "COMBAT_ENHANCEMENTS.setting.enableHpRadial.label": "Activar el radial de salud",
+  "COMBAT_ENHANCEMENTS.setting.enableHpRadial.description": "Activa una barra de progreso radial para mostrar la salud del actor en el registro de combate. La visibilidad queda determinada por los ajustas de la visibilidad de la barra 1 de los tokens (Los DMs siempre podrán ver las barras de salud se esta opción está activa).",
+  "COMBAT_ENHANCEMENTS.setting.removeTargets.label": "Permite eliminar objetivos cada turno.",
+  "COMBAT_ENHANCEMENTS.setting.removeTargets.description": "Permite la eliminación de todos los objetivos y objetivos muertos al final de cada turno. Esto se activa cuando se presiona el botón \"Siguiente giro\"."
+}

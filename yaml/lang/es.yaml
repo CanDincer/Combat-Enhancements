@@ -1,0 +1,13 @@
+# I18N.LANGUAGE: Español
+# I18N.MAINTAINERS: "@Viriato139ac#0342"
+COMBAT_ENHANCEMENTS.setting.reflow.label: Habilitar la reordenación de la iniciativa
+COMBAT_ENHANCEMENTS.setting.reflow.description: Si las iniciativas son iguales, ajusta tanto el contendiente hacia el que están arrastrando como el contendiente que está siendo arrastrado
+COMBAT_ENHANCEMENTS.setting.showHpForType.label: Mostrar PV por tipo de actor
+COMBAT_ENHANCEMENTS.setting.showHPForType.description: Permite que se muestre siempre la barra radial de PVs en el asistente de combate para un tipo de actor en particular, como ,por ejemplo, los personajes
+COMBAT_ENHANCEMENTS.setting.enableHpField.label: Habilitar campo de PVs
+COMBAT_ENHANCEMENTS.setting.enableHpField.description: Habilita un campo editable con los PVs en el asistente de combate que verán los GM y los propietarios de los actores
+COMBAT_ENHANCEMENTS.setting.enableHpRadial.label: Habilitar barra radial de PVs
+COMBAT_ENHANCEMENTS.setting.enableHpRadial.description: Habilita en el retrato del actor del asistente de combate una barra radial de progreso con los PV restantes. Quién puede verla está determinado por los ajustes de visibilidad de la barra 1 de los iconos (aunque los GM siempre podrán ver las barras si está opción está habilitada)
+COMBAT_ENHANCEMENTS.setting.removeTargets.label: Habilitar borrado de objetivos en cada turno
+COMBAT_ENHANCEMENTS.setting.removeTargets.description: Habilita que se borren los objetivos marcados en cada turno. Sucederá al hacer clic en el botón 'Turno siguiente' del asistente de combate
+COMBAT_ENHANCEMENTS.hp.label: PV

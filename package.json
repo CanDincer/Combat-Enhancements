@@ -1,0 +1,27 @@
+{
+  "name": "combat-enhancements",
+  "version": "1.0.0",
+  "description": "Adds health tracking and drag/drop reordering.",
+  "scripts": {
+    "build": "gulp yaml & gulp css",
+    "compile": "gulp css",
+    "watch": "gulp",
+    "gulp": "gulp",
+    "yaml": "gulp yaml"
+  },
+  "browserslist": [
+    "last 3 versions"
+  ],
+  "author": "Asacolips",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-yaml": "^2.0.4",
+    "sass": "^1.52.1"
+  }
+}
