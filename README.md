@@ -6,7 +6,7 @@ This small module adds a radial health bar, an editable HP field, and drag/drop 
 
 ## Installation
 
-Install using the module browser in Foundry or via this manifest URL: [[https://gitlab.com/asacolips-projects/foundry-mods/combat-enhancements/raw/master/module.json](https://raw.githubusercontent.com/CanDincer/Combat-Enhancements/refs/heads/main/module.json)]
+Install using the module browser in Foundry or via this manifest URL: [https://raw.githubusercontent.com/CanDincer/Combat-Enhancements/refs/heads/main/module.json](https://raw.githubusercontent.com/CanDincer/Combat-Enhancements/refs/heads/main/module.json)
 ## Usage
 
 ### Radial Health Bars
