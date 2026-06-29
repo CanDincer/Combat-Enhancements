@@ -38,7 +38,7 @@ export class CombatSidebarCe {
         // Get the incput and actor element.
         const dataset = event.currentTarget.dataset;
         let $input = $(event.currentTarget);
-        let $actorRow = $input.parents(CeUtility.isVersion13() ? '.combatant.actor-elem' : '.directory-item.actor-elem');
+        let $actorRow = $input.parents(CeUtility.isLegacyVersion() ? '.directory-item.actor-elem' : '.combatant.actor-elem');
 
         // If there isn't an actor element, don't proceed.
         if (!$actorRow.length > 0) {
@@ -88,8 +88,8 @@ export class CombatSidebarCe {
 
       // Drag handler for the combat tracker.
       if (game.user.isGM) {
-        const combatantSelector = CeUtility.isVersion13() ? '.combatant' : '.directory-item';
-        const combatTrackerSelector = CeUtility.isVersion13() ? '.combat-tracker' : '#combat-tracker';
+        const combatantSelector = CeUtility.isLegacyVersion() ? '.directory-item' : '.combatant';
+        const combatTrackerSelector = CeUtility.isLegacyVersion() ? '#combat-tracker' : '.combat-tracker';
         $('body')
           // Initiate the drag event.
           .on('dragstart', `${combatTrackerSelector} ${combatantSelector}.actor-elem`, (event) => {
@@ -260,7 +260,8 @@ export class CombatSidebarCe {
     // When the combat tracker is rendered, we need to completely replace
     // its HTML with a custom version.
     Hooks.on('renderCombatTracker', async (app, html, options) => {
-      const safeHtml = CeUtility.isVersion13() ? $(html) : html;
+      const safeHtml = $(html);
+      const combatantSelector = CeUtility.isLegacyVersion() ? '.directory-item' : '.combatant';
       // If there's as combat, we can proceed.
       if (game.combat) {
         // Retrieve a list of the combatants grouped by actor type and sorted
@@ -269,7 +270,8 @@ export class CombatSidebarCe {
 
         combatants.forEach(c => {
           // Add class to trigger drag events.
-          let $combatant = safeHtml.find(`.combatant[data-combatant-id="${c.id}"]`);
+          let selector = `${combatantSelector}[data-combatant-id="${c.id}"]`;
+          let $combatant = safeHtml.find(selector);
           $combatant.addClass('actor-elem');
 
           // Add svg circle.
@@ -302,7 +304,7 @@ export class CombatSidebarCe {
 
         // Drag handler for the combat tracker.
         if (game.user.isGM) {
-          const safeCombatant = CeUtility.isVersion13() ? safeHtml.find('.combatant.actor-elem') : safeHtml.find('.directory-item.actor-elem')
+          const safeCombatant = safeHtml.find(`${combatantSelector}.actor-elem`);
           safeCombatant.attr('draggable', true).addClass('draggable');
         }
 
@@ -424,7 +426,14 @@ export class CombatSidebarCe {
         // Otherwise, retrieve the current and max health bar data.
         else {
           if (currentHealth === undefined) {
-            let resource = combatant.token.getBarAttribute(null, { alternative: combatant.combatAttr });
+            let resource = null;
+            if (typeof combatant.token.getBarAttribute === 'function') {
+              try {
+                resource = combatant.token.getBarAttribute(null, { alternative: combatant.combatAttr });
+              } catch (err) {
+                resource = combatant.token.getBarAttribute?.({ alternative: combatant.combatAttr });
+              }
+            }
             if (resource && resource.type === "bar") {
               currentHealth = resource.value;
               maxHealth = resource.max;

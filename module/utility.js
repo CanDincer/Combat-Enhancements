@@ -42,7 +42,7 @@ export class CeUtility {
     };
   }
 
-  static isVersion13() {
-    return game?.release?.version?.startsWith('13');
+  static isLegacyVersion() {
+    return game?.release?.version?.startsWith('12');
   }
 }

@@ -1,8 +1,10 @@
 # Combat Enhancements
 
-![Foundry v10](https://img.shields.io/badge/foundry-v10-green) ![Foundry v11](https://img.shields.io/badge/foundry-v11-green) ![Foundry v12](https://img.shields.io/badge/foundry-v12-green)
+![Foundry v14](https://img.shields.io/badge/foundry-v14-green)
 
 This small module adds a radial health bar, an editable HP field, and drag/drop re-ordering to the combat tracker.
+
+Compatible with Foundry VTT 10 through 14.
 
 ## Installation
 

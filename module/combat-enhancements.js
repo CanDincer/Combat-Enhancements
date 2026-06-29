@@ -5,7 +5,8 @@ Hooks.once('init', async function() {
   CeUtility.registerHelpers();
 
   // TODO: Determine a good way to localize this.
-  let types = Object.keys(game.system.documentTypes.Actor);
+  const actorTypes = game.system?.documentTypes?.Actor ?? CONFIG.Actor?.documentTypes ?? {};
+  let types = Object.keys(actorTypes);
   let choices = {
     '': '—'
   };
