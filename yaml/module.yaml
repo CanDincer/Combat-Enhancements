@@ -28,4 +28,4 @@ languages:
     path: lang/ja.json
 url: https://github.com/CanDincer/Combat-Enhancements
 manifest: https://raw.githubusercontent.com/CanDincer/Combat-Enhancements/main/module.json
-download: https://github.com/CanDincer/Combat-Enhancements/archive/refs/heads/main.zip
+download: https://github.com/CanDincer/Combat-Enhancements/releases/download/latest/combat-enhancements.zip
