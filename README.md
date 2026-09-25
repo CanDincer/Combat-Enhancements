@@ -2,7 +2,7 @@
 
 Adds editable HP fields, health rings, and drag/drop initiative reordering to Foundry VTT's combat tracker. This fork carries compatibility repairs for the V14 tracker while retaining the V12/V13 render hook interface.
 
-The repair has automated regression and browser coverage. A licensed Foundry world with your game system and other modules still needs the checks in [TESTING.md](TESTING.md).
+Version 1.5.0 adds D&D 6 health handling on Foundry 14.367 or newer. This branch is a test candidate awaiting live-world validation. The implementation has automated regression and browser coverage. A licensed Foundry world with your game system and other modules still needs the checks in [TESTING.md](TESTING.md).
 
 English is the only maintained module language. The module ships and registers only `lang/en.json`, generated from `yaml/lang/en.yaml`.
 
@@ -12,7 +12,7 @@ The published manifest is:
 
 https://raw.githubusercontent.com/CanDincer/Tracker-Enhancements/main/module.json
 
-That manifest downloads `tracker-enhancements.zip` from the release tagged `latest`. The renamed manifest and archive become available when the rebranding release is published. Merging source changes does not update that ZIP.
+That manifest downloads `tracker-enhancements.zip` from the release tagged `latest`. Merging source changes does not update that ZIP. Until 1.5.0 is released, install the PR branch archive or its GitHub Actions test artifact using the development instructions below.
 
 To try a development branch before release, download its source archive, extract it, rename the module directory to `tracker-enhancements`, and place it under your Foundry user data directory's `Data/modules`. The installed directory must contain `module.json`, `module/`, `lang/`, and `styles/dist/`. Restart Foundry and enable Tracker Enhancements in the world. The repository includes generated runtime assets, so a source-archive install does not require Node.js.
 
@@ -40,9 +40,22 @@ All Tracker Enhancements settings are **world settings**, configured by the GM a
 
 When Bar Brawl supplies a visibility rule, that rule can still hide a ring, including in All combatants mode. A ring needs a valid HP resource and positive maximum, and the actor must be present in the player's tracker. Tokens without a canvas object are handled conservatively. Showing a ring does not grant permission to edit HP.
 
-HP fields require permission to update the actor. Enter an absolute value such as `20` or a signed adjustment such as `-5` or `+3`. Enter or leaving the field saves; Escape cancels. Blank and malformed values are rejected. The game system remains responsible for its own HP limits and update rules.
+For **D&D 6**, each row has a single **HP / Temp** pair. GMs and users with actor update permission can edit it. Non-owners see read-only values only for **friendly** tokens with Observer-or-higher permission. Unowned hostile and neutral tokens have no numeric fields. Matching native HP/Temp values are replaced; unrelated tracked resources such as AC remain visible. Turning off the field enhancement restores the native display.
 
-Each tracker edits its own viewed encounter, including pop-outs and detached windows. Core portrait actions, initiative fields, and system controls remain available. Actor and token updates refresh open trackers.
+| Entry | HP field | Temp field |
+| --- | --- | --- |
+| `20` | Set regular HP to 20, retaining Temp | Set Temp to 20, retaining regular HP |
+| `+3` | Heal 3 HP, up to the modified maximum | Add 3 to the current Temp pool |
+| `-25` | Deal 25 damage, consuming Temp first | Deal the same 25 damage, consuming Temp first |
+| `0` | Set regular HP to zero, retaining Temp | Clear Temp without damaging regular HP |
+
+For example, starting at **100/120 HP + 20 Temp**, `-25` in either field leaves **95 HP + 0 Temp**. A negative Temp entry still damages HP when Temp is already zero. Manual damage is a final amount; D&D handles absorption and its normal damage/update hooks. Absolute assignments use the scalar attribute API to affect only the selected pool. Temp addition is a manual pool adjustment, not a change to D&D's non-stacking spell/item grants.
+
+Enter or leaving the field saves; Escape cancels. D&D entries must be whole numbers; blank, malformed, and fractional input is rejected. Pending edits disable the actor's fields across open trackers to prevent duplicate local saves. Cancellation or failure restores current actor values and never bypasses the system API. Other game systems and custom Bar 1 resources retain generic numeric editing, including decimals.
+
+D&D portraits show **two 3.5 px semicircles** at a 48 px portrait size: HP on the left, Temp on the right, both filling bottom to top. Each half uses D&D's effective maximum independently, including maximum-HP modifiers. Thus 100/120 HP plus 20 Temp fills 83.3% of the HP half and 16.7% of the Temp half. Zero Temp leaves its half empty. Temp above the maximum fills its half, while authorized fields retain the actual amount. A zero or invalid maximum suppresses the arcs; rendering never changes actor values.
+
+Each tracker edits its own viewed encounter, including pop-outs and detached windows. Core portrait actions, initiative fields, and system controls remain available. Actor, token, item, and Active Effect changes refresh open trackers, including maximum-HP changes.
 
 ## Initiative reordering
 
@@ -73,5 +86,7 @@ npm run test:browser
 Edit English text in `yaml/lang/en.yaml`, the manifest in `yaml/module.yaml`, and styles in `styles/src/`. `npm run build` regenerates `module.json`, `lang/en.json`, and `styles/dist/`; commit generated files with their sources. CI runs the regression suite, build, browser smoke test, and a check that generated files are current.
 
 See [TESTING.md](TESTING.md) for test scope and live-world verification.
+
+The [v1.5 health design](docs/v1.5-health-design.md) records the agreed behavior and release acceptance checks. The implementation is in this test branch; live validation with the maintainer's D&D 6 world remains pending.
 
 Original module by Asacolips: [upstream project](https://gitlab.com/asacolips-projects/foundry-mods/combat-enhancements).

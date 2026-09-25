@@ -20,3 +20,13 @@ jobs:
       - run: npm run test:browser
       - name: Check generated files are current
         run: git diff --exit-code -- module.json lang styles/dist
+      - name: Upload installable module for testing
+        uses: actions/upload-artifact@v4
+        with:
+          name: tracker-enhancements-test
+          path: |
+            module.json
+            module/
+            lang/
+            styles/dist/
+          if-no-files-found: error

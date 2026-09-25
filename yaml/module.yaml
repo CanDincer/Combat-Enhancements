@@ -1,12 +1,11 @@
 id: tracker-enhancements
 title: Tracker Enhancements
-description: Adds health tracking and drag/drop re-ordering to the combat tracker.
+description: Adds health tracking and drag/drop re-ordering to the encounter tracker.
 authors:
-  - name: Asacolips
-    discord: asacolips
-version: "1.4.1"
+  - name: CanDincer
+version: "1.5.0"
 compatibility:
-  minimum: "12"
+  minimum: "14.367"
   verified: "14"
   maximum: "14"
 esmodules:

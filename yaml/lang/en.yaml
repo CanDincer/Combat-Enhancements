@@ -5,15 +5,20 @@ TRACKER_ENHANCEMENTS.setting.showHPForType.description: World setting, shared by
 TRACKER_ENHANCEMENTS.setting.showHpForType.tokenVisibility: Use token visibility
 TRACKER_ENHANCEMENTS.setting.showHpForType.all: All combatants
 TRACKER_ENHANCEMENTS.setting.showHpForType.actorType: Actor type
-TRACKER_ENHANCEMENTS.setting.enableHpField.label: Enable HP field
-TRACKER_ENHANCEMENTS.setting.enableHpField.description: Enable an editable HP field in the combat tracker for GMs and actor owners.
+TRACKER_ENHANCEMENTS.setting.enableHpField.label: Enable health fields
+TRACKER_ENHANCEMENTS.setting.enableHpField.description: Show one HP field per combatant, plus Temp HP in D&D 6. Owners and GMs can edit; friendly observed actors show read-only values. Unowned enemies have no numeric health fields.
 TRACKER_ENHANCEMENTS.setting.enableHpRadial.label: Enable HP radial bar
-TRACKER_ENHANCEMENTS.setting.enableHpRadial.description: Enables HP circles on combat tracker portraits. Players follow Player HP circle visibility and token Bar 1 visibility; GMs always see valid circles when enabled. Bar Brawl visibility rules still apply.
+TRACKER_ENHANCEMENTS.setting.enableHpRadial.description: Enables HP circles on combat tracker portraits. In D&D 6, the left half is HP and the right half is Temp HP; both fill bottom to top against the modified HP maximum. Players follow Player HP circle visibility and token Bar 1 visibility. Bar Brawl visibility rules still apply.
 TRACKER_ENHANCEMENTS.setting.removeTargets.label: Enable target removal every turn
 TRACKER_ENHANCEMENTS.setting.removeTargets.description: Clear your targets when the active encounter changes turn or round, or ends. Applies immediately without reloading.
 TRACKER_ENHANCEMENTS.setting.hideNonAllyInitiative.label: Hide non-ally initiative
 TRACKER_ENHANCEMENTS.setting.hideNonAllyInitiative.description: Hide non-ally initiative from players on FVTT combat tracker
 TRACKER_ENHANCEMENTS.hp.label: HP
+TRACKER_ENHANCEMENTS.temp.label: Temp
+TRACKER_ENHANCEMENTS.hp.help: '20: set HP; +3: heal 3 HP; -5: deal 5 damage, using Temp first.'
+TRACKER_ENHANCEMENTS.temp.help: '20: set Temp; +3: add 3 Temp; -5: deal 5 damage, using Temp first and then HP.'
+TRACKER_ENHANCEMENTS.resource.help: Enter a number to set this resource, or a signed change such as -5 or +3.
+TRACKER_ENHANCEMENTS.invalidDndHp: Enter a whole number or a signed change such as -10 or +3.
 
 TRACKER_ENHANCEMENTS.invalidHp: Enter a number or a signed change such as -10 or +3.
 TRACKER_ENHANCEMENTS.updateFailed: The update failed. Check permissions and the browser console for details.

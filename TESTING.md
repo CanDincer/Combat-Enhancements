@@ -4,6 +4,9 @@
 
 The regression suite covers:
 
+- D&D 6 API arguments and HP/Temp outcomes, full Temp damage overflow, zero Temp damage, absolute corrections, healing caps, non-stacking grant totals, hook cancellation, unavailable APIs, and over-maximum source corrections.
+- Independent arc fractions, modified/zero maxima, numeric ownership/friendliness rules, reversible native resource deduplication, pending saves across windows, preserved drafts, and coalesced item/effect refreshes.
+
 - HP resource resolution, zero HP, invalid values, permissions, visibility, and optional Bar Brawl APIs.
 - The reported owned-PC/other-PC/NPC visibility combinations, All combatants, literal encounter/group actor types, and world-setting refreshes on player clients.
 - Native and legacy tracker roots, repeated renders, separate documents, the viewed encounter, and preservation of core control events.
@@ -13,7 +16,7 @@ The regression suite covers:
 - Target clearing on relevant turn/round/end events without system-specific HP assumptions.
 - Rebranding settings migration after ready with the old module disabled, all six settings, explicit false/empty values, custom actor types, preserved new preferences, GM-only writes, invalid data, and retry after partial failure.
 
-The Playwright smoke test runs actual browser input and drag/drop events against a tracker fixture. It checks Enter, Escape, blur validation, core controls, narrow rows with long names, dark/light themes, active-turn preservation, player edit permissions, hidden initiative, and the full HP visibility choice matrix for an owned PC, another PC, and a zero-HP NPC. It produces screenshots in `test-results/`.
+The Playwright smoke test runs actual browser input and drag/drop events against a tracker fixture. It checks Enter, Escape, blur validation, core controls, narrow rows with long names, dark/light themes, active-turn preservation, player edit permissions, hidden initiative, and the full HP visibility choice matrix for an owned PC, another PC, and a zero-HP NPC. It also exercises the D&D field pair, Temp overflow, absolute corrections, fractional-input rejection, saved drafts, effective maxima, native HP/Temp deduplication, and unrelated AC preservation. It produces GM/player screenshots in both themes in `test-results/`.
 
 ```sh
 npm ci
@@ -25,6 +28,29 @@ git diff --exit-code -- module.json lang styles/dist
 ```
 
 An existing compatible Chromium executable can be selected with `TE_CHROMIUM_PATH`. Set `TE_CORE_CSS` to a locally available Foundry core CSS file to repeat the layout checks with that stylesheet.
+
+## Focused 1.5.0 test pass
+
+The public API baseline was rechecked against [D&D 6.0.5](https://github.com/foundryvtt/dnd5e/tree/release-6.0.5) on 2026-09-25. Local validation passed 73 regression/API-contract tests, the build, and the browser suite in Chromium 133, both with the fixture stylesheet and with the available public-demo V14.365 core stylesheet. Screenshots were reviewed. The older stylesheet check is a layout reference; it does not replace live testing on Foundry 14.367 or newer. Automated D&D fixtures model the public contract; they do not run the full system. Record your exact Foundry build, D&D 6.0.x patch, and enabled modules when reporting the live results.
+
+Use a disposable encounter with an owned PC, another friendly PC with Observer access, and an unowned enemy. Open the GM and player clients plus a detached tracker.
+
+| Check | Expected result |
+| --- | --- |
+| Start at 100/120 HP + 20 Temp; enter `-25` in Temp | 95 HP / 0 Temp, exactly one damage event |
+| Reset; enter `-5` in HP | 100 HP / 15 Temp; regular HP is unchanged |
+| At zero Temp, enter `-5` in Temp | 5 damage to regular HP |
+| Enter absolute HP `95`, Temp `10`, Temp `0` | Set only the selected pool; clearing Temp does not damage HP |
+| Enter Temp `+3` while Temp is 20 | 23 Temp; no regular-HP healing |
+| Heal above the effective maximum; apply/remove positive and negative maximum modifiers | HP respects the effective cap; both arcs rescale; no extra healing/damage caused by rendering |
+| Expire/toggle an item or Active Effect that changes max HP | All open trackers refresh, including synthetic actors and off-scene combatants |
+| Compare GM, owned PC, friendly Observer, and enemy Observer rows | Two editable fields / two editable fields / two read-only values / no numbers; never a duplicate HP value |
+| Configure native tracked resource as HP, Temp, then AC | HP/Temp duplicates disappear; AC remains |
+| Inspect 100/120 HP + 20 Temp, full HP without Temp, and zero HP with Temp | Independent 3.5 px halves; Temp never fills missing regular HP |
+| Enter, blur, Escape, rerender while typing, and edit across linked rows/pop-outs | One save, Escape cancels, drafts survive unrelated renders, and pending fields cannot submit twice |
+| Cause an external damage hook to cancel | Current values restored; no raw fallback write or duplicate concentration/status handling |
+
+Normal damage/concentration modules must be enabled for the final integration pass. Check concentration when all damage is absorbed by Temp as well as when damage reaches regular HP. Client-to-client simultaneous edits are not transactional; do not automatically retry an uncertain damage save.
 
 ## What was checked
 
@@ -66,8 +92,6 @@ Use a disposable encounter in your actual V14 build and game system, with a GM a
 
 ## Packaging
 
-Before publishing the rebrand, rename the GitHub repository to `Tracker-Enhancements` and update its description to `Tracker Enhancements for Foundry VTT: HP tracking and drag-and-drop initiative reordering.` The manifest and documentation use `https://github.com/CanDincer/Tracker-Enhancements`. GitHub repository settings are separate from the files changed by a pull request.
+The branch manifest and npm metadata are version 1.5.0. Run the validation commands, then package `module.json` at the archive root together with `module/`, `lang/`, and `styles/dist/`. CI uploads these runtime files as an installable test artifact. A source-archive install also works because generated assets are committed. Keep development dependencies and tests out of a release archive.
 
-After the live-world checks, choose the release version in `yaml/module.yaml`, keep the root version fields in `package.json` and `package-lock.json` in sync, replace the Unreleased changelog heading, and run the full validation commands. The rebranding branch retains 1.4.1 until the next release version is selected. Build `tracker-enhancements.zip` with `module.json` at its root together with `module/`, `lang/`, and `styles/dist/`. Keep development dependencies and tests out of the release archive. Confirm it contains `module/tracker-enhancements.js` and `styles/dist/tracker-enhancements.css`, with no obsolete runtime assets.
-
-The current manifest's download URL points to the literal release tag `latest` and asset name `tracker-enhancements.zip`. Update the published manifest and its corresponding archive together. Keep the old published `combat-enhancements.zip` asset intact for existing installations until their users switch; the new package is installed separately. Finally, install through the new manifest into a clean test world and repeat an HP edit and initiative move. A source merge alone does not update an existing release asset.
+Complete the live checks before publishing the release. The current manifest's download URL points to the literal release tag `latest` and asset name `tracker-enhancements.zip`. Update the published manifest and its corresponding archive together. Keep the old published `combat-enhancements.zip` asset intact for existing installations until their users switch; the new package is installed separately. Finally, install through the new manifest into a clean test world and repeat an HP edit and initiative move. A source merge alone does not update an existing release asset.
