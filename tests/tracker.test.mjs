@@ -21,6 +21,7 @@ for (const legacy of [false, true]) {
     let saves = 0;
     sidebar.updateHp = async () => { saves++; };
     root.querySelector('.te-modify-hp').dispatchEvent(new dom.window.Event('change', { bubbles: true }));
+    await Promise.resolve();
     assert.equal(saves, 1);
     env.settings.set('enableHpField', false);
     env.settings.set('enableHpRadial', false);
@@ -194,10 +195,12 @@ test('actor and token updates refresh every open tracker and stop after close', 
   await env.emit('renderCombatTracker', second.app, second.root);
   await env.emit('updateActor', member.actor);
   await env.emit('updateToken', member.token);
-  assert.equal(first.app.renders, 2);
-  assert.equal(second.app.renders, 2);
+  await new Promise(resolve => setTimeout(resolve, 5));
+  assert.equal(first.app.renders, 1);
+  assert.equal(second.app.renders, 1);
   await env.emit('closeCombatTracker', second.app);
   await env.emit('updateActor', member.actor);
-  assert.equal(first.app.renders, 3);
-  assert.equal(second.app.renders, 2);
+  await new Promise(resolve => setTimeout(resolve, 5));
+  assert.equal(first.app.renders, 2);
+  assert.equal(second.app.renders, 1);
 });

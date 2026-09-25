@@ -21,6 +21,7 @@ export function environment() {
   globalThis.CONST = {
     TOKEN_DISPLAY_MODES: { NONE: 0, CONTROL: 10, OWNER_HOVER: 20, HOVER: 30, OWNER: 40, ALWAYS: 50 },
     TOKEN_DISPOSITIONS: { HOSTILE: -1, NEUTRAL: 0, FRIENDLY: 1 },
+    DOCUMENT_OWNERSHIP_LEVELS: { NONE: 0, LIMITED: 1, OBSERVER: 2, OWNER: 3 },
   };
   globalThis.game = {
     user: { isGM: true, targets: new Set(), viewedScene: 'scene' },
@@ -51,7 +52,9 @@ export function environment() {
 
 export function combatant(id, initiative = 10, { hp = 10, max = 20, owner = false, token = true, resource } = {}) {
   const actor = {
-    id: `actor-${id}`, uuid: `Actor.${id}`, type: 'npc', isOwner: owner,
+    id: `actor-${id}`, uuid: `Actor.${id}`, documentName: 'Actor', type: 'npc', isOwner: owner,
+    observer: false,
+    testUserPermission() { return this.isOwner || this.observer; },
     system: { attributes: { hp: { value: hp, max } } }, updates: [],
     async update(data) {
       this.updates.push(data);

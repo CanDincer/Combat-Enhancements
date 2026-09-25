@@ -1,4 +1,14 @@
-# Unreleased
+# 1.5.0 (test candidate)
+
+- Use D&D 6 modifyTokenAttribute/applyDamage for damage, healing, and Temp grants; use scalar attribute operations for absolute corrections.
+- Negative entries in either HP or Temp apply full damage, including overflow into HP. Keep the two pools independent for absolute assignments.
+- Replace duplicated HP displays with one HP/Temp pair. Owners and GMs edit; friendly Observers read; unowned enemies have no numbers.
+- Draw independent HP-left and Temp-right semicircles with 3.5 px strokes. Use the prepared effective maximum, including maximum modifiers and off-scene actors.
+- Refresh item/effect-driven health changes across trackers, retain uncommitted drafts, and prevent duplicate local saves across linked rows/windows.
+- Preserve custom resources, Bar Brawl visibility, initiative/reflow, core controls, and existing settings.
+- Add D&D API contract tests, browser coverage, and a focused live-world test checklist. Require Foundry 14.367 or newer.
+
+# 1.4.2
 
 - Rename the project and Foundry package to Tracker Enhancements (tracker-enhancements).
 - Rename runtime assets, settings and translation namespaces, CSS classes, drag data, package metadata and project URLs.

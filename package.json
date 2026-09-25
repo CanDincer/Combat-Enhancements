@@ -1,6 +1,6 @@
 {
   "name": "tracker-enhancements",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Adds health tracking and drag/drop reordering.",
   "scripts": {
     "build": "gulp build",
